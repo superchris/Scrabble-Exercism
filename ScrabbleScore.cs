@@ -1,47 +1,40 @@
 using System;
+using System.Collections.Generic;
 
 public static class ScrabbleScore
 {
+    static Dictionary<char, int> values = new Dictionary<char, int>()
+        {
+            {'a', 1},
+            {'e', 1},
+            {'i', 1},
+            {'o', 1},
+            {'u', 1},
+            {'l', 1},
+            {'n', 1},
+            {'r', 1},
+            {'s', 1},
+            {'t', 1},
+            {'d', 2},
+            {'g', 2},
+            {'b', 3},
+            {'c', 3}, 
+            {'m', 3}, 
+            {'p', 3},
+            {'f', 4},
+            {'h', 4},
+            {'v', 4},
+            {'w', 4},
+            {'y', 4},
+            {'k', 5},
+            {'j', 8},
+            {'x', 8},
+            {'q', 10},
+            {'z', 10}
+      };
     private static int letterValues(char letter)
-    {
-        int value = 0;
-
-        char[] addOne = new Char[10]{'a', 'e', 'i', 'o', 'u', 'l', 'n', 'r', 's', 't'};
-        char[] addTwo = new Char[2]{'d', 'g'};
-        char[] addThree = new Char[4]{'b', 'c', 'm', 'p'};
-        char[] addFour = new Char[5]{'f', 'h', 'v', 'w', 'y'};
-        char[] addFive = new Char[1]{'k'};
-        char[] addEight = new Char[2]{'j', 'x'};
-        char[] addTen = new Char[2]{'q', 'z'};
-        
-        if (Array.Exists(addOne, checkLetter => checkLetter == letter)) 
-        {
-                value = 1;
-        }
-        else if (Array.Exists(addTwo, checkLetter => checkLetter == letter)) 
-        {
-                value = 2;
-        }
-        else if (Array.Exists(addThree, checkLetter => checkLetter == letter)) 
-        {
-                value = 3;
-        }
-        else if (Array.Exists(addFour, checkLetter => checkLetter == letter)) 
-        {
-                value = 4;
-        } 
-        else if (Array.Exists(addFive, checkLetter => checkLetter == letter)) 
-        {
-                value = 5;
-        }
-        else if (Array.Exists(addEight, checkLetter => checkLetter == letter)) 
-        {
-                value = 8;
-        }
-        else if (Array.Exists(addTen, checkLetter => checkLetter == letter)) 
-        {
-                value = 10;
-        }
+    {   
+        values.TryGetValue(letter, out int value);
 
         return value;
     } 
