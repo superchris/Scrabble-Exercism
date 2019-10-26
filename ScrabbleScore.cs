@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 public static class ScrabbleScore
 {
@@ -43,42 +44,27 @@ public static class ScrabbleScore
         int score = 0;
         string word = input.ToLower();
 
-        foreach (char c in word) 
-        {
-            score += letterValues(c);
-        }
+        var scores = word.Select(c => letterValues(c));
 
+        score = scores.Sum();
+        
         return score;
     }
     public static int SpecialLetterScore(int score, string type, char letter) 
     {
         type = type.ToLower();
-        int addScore = 0;
 
-        if (type == "double") 
-        {
-            addScore = letterValues(letter);
-        } 
-        else if (type == "triple")
-        {
-            addScore = 2 * letterValues(letter);
-        }
+        int finalScore = type == "double" ? score + letterValues(letter) : type == "triple" ? score + (2 * letterValues(letter)): score;
+
+        return finalScore;
         
-        return score += addScore;
     }
     public static int SpecialWordScore(int score, string type) 
     {
         type = type.ToLower();
         
-        if (type == "double") 
-        {
-            score *= 2;
-        } 
-        else if (type == "triple") 
-        {
-            score *= 3;
-        }
+        int finalScore = type == "double" ? score * 2 : type == "triple" ? score * 3 : score;
 
-        return score;
+        return finalScore;
     }
 }

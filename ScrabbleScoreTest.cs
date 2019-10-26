@@ -100,4 +100,22 @@ public class ScrabbleScoreTest
     {
         Assert.Equal(27, ScrabbleScore.SpecialWordScore(ScrabbleScore.SpecialLetterScore(ScrabbleScore.Score("pinata"), "double", 'n'), "triple"));
     }
+
+    [Fact]
+    public void Random_character()
+    {
+        Assert.Equal(0, ScrabbleScore.Score("["));
+    }
+
+    [Fact]
+    public void Invalid_special_word_type()
+    {
+        Assert.Equal(8, ScrabbleScore.SpecialWordScore(ScrabbleScore.Score("pinata"), "Doubleword"));
+    }
+
+    [Fact]
+    public void Random_character_in_word()
+    {
+        Assert.Equal(41, ScrabbleScore.Score("Oxyphen-Butazone"));
+    }
 }
